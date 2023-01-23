@@ -1,0 +1,83 @@
+.button {
+    &--dialog {
+        padding: 8px 10px;
+        border-radius: 12px;
+        color: #fff;
+        background-color:darkgreen;
+        font-size: 27px;
+        cursor: pointer;
+        border: none;
+    }
+}
+
+.dialog {
+    border-radius: 20px;
+    max-width: 500px;
+    border: none;
+    position: relative;
+
+    &--background {
+        &::backdrop {
+            background: linear-gradient(#e66465, #9198e5);
+            z-index: -1;
+            opacity: 0.5;
+        }
+    }
+
+    &--before {
+        overflow: visible;
+        transform-style: preserve-3d;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%) translateZ(-1px);
+            background: linear-gradient(#e66465,#9198e5);
+            z-index: -1000000;
+            opacity: .5;
+        }
+
+        &::backdrop {
+            display: none;
+        }
+    }
+
+    &--animate {
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.5s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+      
+      &[open] {
+        opacity: 1;
+        pointer-events: inherit;
+      }
+    }
+}
+
+.title {
+    &--h4 {
+        text-transform: none !important;
+    }
+
+    &--small {
+        font-size: 16px;
+    }
+}
+
+section.flex {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    height: 100%;
+}

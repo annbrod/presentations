@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+            <div class="slides">
+				<section class="intro">
+                    <section data-auto-animate>
+                        <pre><code class="hljs">
+                    <dialog></dialog>
+                        </code></pre>
+                    </section>
+                </section>
+				<section>
+                    <dialog class="dialog" id="dialog">
+                        <form class="dialog-form" method="dialog">
+                            <p>Hi, I'm a dialog.</p>
+                            <button class="button button--dialog">Close</button>
+                        </form>
+                    </dialog>
+                    <button class="button button--dialog" onclick="dialog.showModal()">Open Dialog</button>
+				</section>
+                <section>
+					<pre>
+                        <code>
+<dialog id="dialog">
+    <form method="dialog">
+        <p>
+            Hi, I'm a dialog.
+            Notice I have
+            a gray overlay behind me?
+        </p>
+        <button>Close</button>
+    </form>
+</dialog>
+<button onclick="dialog.showModal()">Open Dialog</button>
+					</code></pre>
+				</section>
+                <!-- <section>
+                    <ul>
+                        <li>Не нужно знание JS, можно быстро создать модалку</li>
+                        <li>Есть псевдо-элемент для шторки</li>
+                    </ul>
+                </section> -->
+
+                <section>
+                    <h2>Поддержка</h2>
+                    <img src="images/modal-support.jpeg" alt="поддержка">
+                    <h4>Полифилл - <a href="https://github.com/GoogleChrome/dialog-polyfill">dialogPolyfill</a></h4>
+                </section>
+
+                <section>
+                    <h4 class="title title--h4">Псевдо-элемент ::backdrop</h4>
+                    <div class="part part--result">
+                        <dialog class="dialog dialog--background" id="dialog-background">
+                            <form class="dialog-form" method="dialog">
+                                <p>Hi, I'm a dialog</p>
+                                <button class="button button--dialog">Close</button>
+                            </form>
+                        </dialog>
+                        <button class="button button--dialog" onclick="openBackgroundDialog()">Open Dialog</button>
+                    </div>
+                    <div class="part part--code">
+					<pre>
+                        <code>
+    dialog::backdrop {
+        background: linear-gradient(#e66465, #9198e5);
+    }
+
+    dialog + .backdrop { /* если используем polyfill */
+        background: linear-gradient(#e66465, #9198e5);
+    }
+					</code></pre>
+                    </div>
+				</section>
+                <section>
+                    <h6 class="title title--h4 title--small">Можно использовать :before  вместо :backdrop</h6>
+                    <dialog class="dialog dialog--before" id="dialog-before">
+                        <form method="dialog">
+                            <p>
+                                I have a ::before element
+                            </p>
+                            <button class="button button--dialog">Close</button>
+                        </form>
+                    </dialog>
+                    <button class="button button--dialog" onclick="openDialogBefore()">Open Dialog 1</button>
+                </section>
+                <section>
+                    <h6 class="title title--h4 title--small">Если модалок больше одной,  немного js писать придется</h6>
+
+                    <dialog class="dialog dialog--background" id="dialog-double">
+                        <form method="dialog">
+                            <p>
+                                I am the first
+                            </p>
+                            <button class="button button--dialog">Close</button>
+                        </form>
+                    </dialog>
+                    <button class="button button--dialog" onclick="openDialogDouble()">Open Dialog 1</button>
+
+                    <dialog class="dialog dialog--background" id="dialog-double">
+                        <form method="dialog">
+                            <p>
+                                I am the second
+                            </p>
+                            <button class="button button--dialog">Close</button>
+                        </form>
+                    </dialog>
+                    <button class="button button--dialog" onclick="openDialogDouble()">Open Dialog 2</button>
+                </section>
+                <section>
+
+                    <dialog class="dialog dialog--background" id="dialog-one">
+                        <form method="dialog">
+                            <p>
+                                I am the first
+                            </p>
+                            <button class="button button--dialog">Close</button>
+                        </form>
+                    </dialog>
+                    <button class="button button--dialog" onclick="openDialogOne()">Open Dialog 1</button>
+
+                    <dialog class="dialog dialog--background" id="dialog-two">
+                        <form method="dialog">
+                            <p>
+                                I am the second
+                            </p>
+                            <button class="button button--dialog">Close</button>
+                        </form>
+                    </dialog>
+                    <button class="button button--dialog" onclick="openDialogTwo()">Open Dialog 2</button>
+
+                        <pre>
+                            <code>
+    //первый попап
+    <dialog id="dialog-one">
+        ...
+    </dialog>
+    //кнопка открытия - меняем функцию по клику
+    <button onclick="openDialogOne()">Open Dialog</button>
+
+    //второй попап
+    <dialog id="dialog-two">
+        ...
+    </dialog>
+    //кнопка открытия - меняем функцию по клику
+    <button onclick="openDialogTwo()">Open Dialog</button>
+
+    //функции открытия для каждого попапа
+    function openDialogOne() {
+        document.getElementById("dialog-one").showModal();
+    }
+
+    function openDialogTwo() {
+        document.getElementById("dialog-two").showModal();
+    }
+                        </code></pre>
+                </section>
+                <section>
+                    <dialog class="dialog dialog--background" id="dialog-outer">
+                        <form method="dialog">
+                            <p>
+                                I am the first
+                            </p>
+                            <button class="button button--dialog">Close</button>
+                            <button class="button button--dialog" onclick="openDialogInner()">Open Dialog 2</button>
+                        </form>
+                    </dialog>
+                    <button class="button button--dialog" onclick="openDialogOuter()">Open Dialog 1</button>
+
+                    <dialog class="dialog dialog--background" id="dialog-inner">
+                        <form method="dialog">
+                            <p>
+                                I am the second
+                            </p>
+                            <button class="button button--dialog">Close</button>
+                        </form>
+                    </dialog>
+
+                </section>
+                <section class="flex">
+                    <h4>Анимация</h4>
+                    <ul>
+                        <li>Показывается через display:block; / display:none</li>
+                        <li>Есть атрибут open</li>
+                        <li>Либо  js + классы</li>
+                    </ul>
+                        <dialog class="dialog dialog--animate" id="dialog-animate">
+                            <form class="dialog-form" method="dialog">
+                                <p>Hi, I'm a dialog.</p>
+                                <button class="button button--dialog">Close</button>
+                            </form>
+                        </dialog>
+                        <button class="button button--dialog" onclick="openDialogAnimate()">Open Dialog</button>
+                </section>
+			</div>
+        </div>
+        <script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+
+            function openBackgroundDialog() {
+                document.getElementById("dialog-background").showModal();
+            }
+
+            function openDialogOne() {
+                document.getElementById("dialog-one").showModal();
+            }
+
+            function openDialogTwo() {
+                document.getElementById("dialog-two").showModal();
+            }
+
+            function openDialogDouble() {
+                document.getElementById("dialog-double").showModal();
+            }
+
+            function openDialogBefore() {
+                document.getElementById("dialog-before").showModal();
+            }
+
+            function openDialogOuter() {
+                document.getElementById("dialog-outer").showModal();
+            }
+
+            function openDialogInner() {
+                document.getElementById("dialog-inner").showModal();
+            }
+
+            function openDialogAnimate() {
+                document.getElementById("dialog-animate").showModal();
+            }
+		</script>
+    </body>
+</html>

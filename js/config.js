@@ -65,9 +65,6 @@ export default {
 	// Flags if we should monitor the hash and change slides accordingly
 	respondToHashChanges: true,
 
-	// Enable support for jump-to-slide navigation shortcuts
-	jumpToSlide: true,
-
 	// Push each slide change to the browser history.  Implies `hash: true`
 	history: false,
 
